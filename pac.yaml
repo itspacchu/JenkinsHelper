@@ -1,0 +1,7 @@
+jenkins:
+  url: "https://jenkins.yourdomain.org"
+  auth:
+    username: "d2h5IGFyZSB5b3UgdHJ5aW5nIHRvCg==" # BASE64
+    token: "Basic aHR0cHM6Ly95b3V0dS5iZS9kUXc0dzlXZ1hjUSBGUkVFIE1PTkVZIDEwMCUgTEVHSVQgQ0xJQ0sgTUUgUExTCg==" # BASE64
+    cookie: "get cookie from Web UI" 
+    crump: "get crumps from Web UI"
