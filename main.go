@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/base64"
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"strings"
@@ -57,10 +58,10 @@ func checkForInputRequested(consoleOutput string) bool {
 func fullyAutomatedPipelineRun(jenkinsURL string) {
 	myCookie := ""
 	myCrumpi := ""
-	// fmt.Printf("[pacJenker.go] Enter cookie used to login into Jenkins : ")
-	// fmt.Scanf("%s", &myCookie)
-	// fmt.Printf("[pacJenker.go] Enter cookie used to login into Jenkins : ")
-	// fmt.Scanf("%s", &myCrumpi)
+	fmt.Printf("[pacJenker.go] Enter cookie used to login into Jenkins : ")
+	fmt.Scanf("%s", &myCookie)
+	fmt.Printf("[pacJenker.go] Enter cookie used to login into Jenkins : ")
+	fmt.Scanf("%s", &myCrumpi)
 	username, _ := base64.StdEncoding.DecodeString(USERNAME)
 	fmt.Printf("[pacJenker.go] Attempting to login as %s\n", string(username))
 
@@ -107,11 +108,14 @@ func main() {
 		fmt.Printf("%s[pacJenker.go] Error unmarshal-ing pac.yaml%s\n", Red, Reset)
 	}
 
+	jenkurl := flag.String("url", "", "give jenkins for PSIO style jenkinsfiles (Eg. https://jenkins.something.org/job/FOLDER1/job/JOB1/job/MyBranch)")
+	fmt.Println(jenkurl)
+	flag.Parse()
 	JENKINS_URL = jenkinsConfig.Jenkins.URL
 	USERNAME = jenkinsConfig.Jenkins.Auth.Username
 	AUTHORIZATION_TOKEN = jenkinsConfig.Jenkins.Auth.Token
 	COOKIE = jenkinsConfig.Jenkins.Auth.Cookie
 	CRUMP = jenkinsConfig.Jenkins.Auth.Crump
 
-	fullyAutomatedPipelineRun("https://jenkins.something.org/job/FOLDER1/job/JOB1/job/MyBranch")
+	fullyAutomatedPipelineRun(*jenkurl)
 }
